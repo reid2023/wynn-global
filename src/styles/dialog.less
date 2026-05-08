@@ -1,0 +1,85 @@
+.common-dialog-large,
+.common-dialog-middle,
+.common-dialog-litter {
+  background: url('@/assets/imgs/public/bg.png') center top no-repeat;
+  background-size: 100% 100%;
+  border-radius: 20px;
+  width: 694px;
+  height: 900px;
+  max-width: 94vw;
+  overflow-y: auto;
+
+  .dialog-header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 140px;
+
+    .title {
+      padding-top: 84px;
+      font-size: 32px;
+      font-weight: 700;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 66px;
+      right: 0;
+      border: none;
+      padding: 0 0 6px 6px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        width: 93px;
+        height: 76px;
+      }
+    }
+  }
+
+  .dialog-body {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 0 22px;
+    padding-top: 40px;
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-label {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: var(--letter-spacing-sm);
+    }
+
+    .phone-input-wrapper {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+  }
+}
+
+.common-dialog-large {
+  background: url('@/assets/imgs/public/bg_chang.png') center top no-repeat;
+  background-size: 100% 100%;
+  height: 1064px;
+}
+
+.common-dialog-middle {
+  background: url('@/assets/imgs/public/bg_zhong.png') center top no-repeat;
+  background-size: 100% 100%;
+  height: 1004px;
+}

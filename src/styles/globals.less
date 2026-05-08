@@ -1,0 +1,527 @@
+/* 全局样式 - 基于 LESS 变量的主题系统 */
+
+/* ============ 字体引入 ============ */
+@import '../assets/fonts/fonts.less';
+
+@import './utilities.less';
+
+/* 公共样式 */
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+  width: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* 渐变文字 - 金色上到下 */
+.text-gradient-gold {
+  background: linear-gradient(180deg, #f6d39f 0%, #fbdfc0 50%, #e3b575 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-gold-shadow {
+  background: linear-gradient(180deg, #f6d39f 0%, #fbdfc0 50%, #e3b575 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  filter: drop-shadow(0 1px 0.5px rgba(0, 0, 0, 0.2)) drop-shadow(0 2px 1px rgba(0, 0, 0, 0.2))
+    drop-shadow(0 4px 2px rgba(0, 0, 0, 0.15)) drop-shadow(0 6px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* 渐变文字 - 金色光晕效果（中间白色，四周棕金色） */
+.text-gradient-gold-light {
+  background: linear-gradient(180deg, #fffffd 0%, #fffffd 50%, #fffffd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 2px #c98612) drop-shadow(0 0 4px #b27002) drop-shadow(0 0 6px #9d5f02)
+    drop-shadow(0 0 8px rgba(106, 60, 8, 0.8));
+}
+
+/* 渐变文字 - 黄色内部，红色边框效果 */
+.text-gradient-gold-yellow {
+  color: #fdce19;
+  font-weight: 700; // 加粗使描边更明显
+
+  /* Webkit 浏览器（Chrome, Safari, Edge, Opera） */
+  -webkit-text-stroke: 0.5px #a7170b;
+
+  /* 标准版本（Firefox 49+） */
+  text-stroke: 0.5px #a7170b;
+
+  /* 备用方案：text-shadow 描边（所有浏览器都支持） */
+  text-shadow:
+    -1px -1px 0 #a7170b,
+    1px -1px 0 #a7170b,
+    -1px 1px 0 #a7170b,
+    1px 1px 0 #a7170b;
+}
+
+/* 渐变文字 - 黄色内部，复制文字 */
+.text-gradient-gold-copy {
+  color: #fff9ce;
+  font-weight: 700; // 加粗使描边更明显
+
+  /* Webkit 浏览器（Chrome, Safari, Edge, Opera） */
+  -webkit-text-stroke: 0.5px #e46e0a;
+
+  /* 标准版本（Firefox 49+） */
+  text-stroke: 0.5px #e46e0a;
+
+  /* 备用方案：text-shadow 描边（所有浏览器都支持） */
+  text-shadow:
+    -1px -1px 0 #e46e0a,
+    1px -1px 0 #e46e0a,
+    -1px 1px 0 #e46e0a,
+    1px 1px 0 #e46e0a;
+}
+
+.text-gradient-gold-daily-amount {
+  color: #ffffb5;
+  font-weight: 700; // 加粗使描边更明显
+
+  /* Webkit 浏览器（Chrome, Safari, Edge, Opera） */
+  -webkit-text-stroke: 0.2px #9e5d26;
+
+  /* 标准版本（Firefox 49+） */
+  text-stroke: 0.2px #9e5d26;
+
+  /* 备用方案：text-shadow 描边（所有浏览器都支持） */
+  text-shadow:
+    -1px -1px 0 #9e5d26,
+    1px -1px 0 #9e5d26,
+    -1px 1px 0 #9e5d26,
+    1px 1px 0 #9e5d26;
+}
+
+.text-gradient-gold-vip-recharge-amount {
+  color: #fff;
+  font-weight: 700; // 加粗使描边更明显
+
+  /* Webkit 浏览器（Chrome, Safari, Edge, Opera） */
+  -webkit-text-stroke: 0.2px #e46e0a;
+
+  /* 标准版本（Firefox 49+） */
+  text-stroke: 0.2px #e46e0a;
+
+  /* 备用方案：text-shadow 描边（所有浏览器都支持） */
+  text-shadow:
+    -1px -1px 0 #e46e0a,
+    1px -1px 0 #e46e0a,
+    -1px 1px 0 #e46e0a,
+    1px 1px 0 #e46e0a;
+}
+
+/* 渐变border */
+.border-gradient-gold {
+  position: relative;
+
+  // 渐变边框效果 - 使用伪元素实现
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    padding: 2px;
+    background: linear-gradient(180deg, #b19d32 0%, #644421 50%, #362c08 100%);
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  &:hover::before,
+  &:has(.form-input:focus)::before {
+    background: linear-gradient(180deg, #ccb53c 0%, #855724 50%, #433604 100%);
+  }
+}
+
+/* 间距工具类 */
+.mt-xs {
+  margin-top: var(--spacing-xs);
+}
+.mt-sm {
+  margin-top: var(--spacing-sm);
+}
+.mt-md {
+  margin-top: var(--spacing-md);
+}
+.mt-lg {
+  margin-top: var(--spacing-lg);
+}
+.mt-xl {
+  margin-top: var(--spacing-xl);
+}
+.mt-2xl {
+  margin-top: var(--spacing-2xl);
+}
+
+.mb-xs {
+  margin-bottom: var(--spacing-xs);
+}
+.mb-sm {
+  margin-bottom: var(--spacing-sm);
+}
+.mb-md {
+  margin-bottom: var(--spacing-md);
+}
+.mb-lg {
+  margin-bottom: var(--spacing-lg);
+}
+.mb-xl {
+  margin-bottom: var(--spacing-xl);
+}
+.mb-2xl {
+  margin-bottom: var(--spacing-2xl);
+}
+
+.my-xs {
+  margin: var(--spacing-xs) 0;
+}
+.my-sm {
+  margin: var(--spacing-sm) 0;
+}
+.my-md {
+  margin: var(--spacing-md) 0;
+}
+.my-lg {
+  margin: var(--spacing-lg) 0;
+}
+.my-xl {
+  margin: var(--spacing-xl) 0;
+}
+
+.px-xs {
+  padding: 0 var(--spacing-xs);
+}
+.px-sm {
+  padding: 0 var(--spacing-sm);
+}
+.px-md {
+  padding: 0 var(--spacing-md);
+}
+.px-lg {
+  padding: 0 var(--spacing-lg);
+}
+.px-xl {
+  padding: 0 var(--spacing-xl);
+}
+
+.py-xs {
+  padding: var(--spacing-xs) 0;
+}
+.py-sm {
+  padding: var(--spacing-sm) 0;
+}
+.py-md {
+  padding: var(--spacing-md) 0;
+}
+.py-lg {
+  padding: var(--spacing-lg) 0;
+}
+.py-xl {
+  padding: var(--spacing-xl) 0;
+}
+
+/* 文本样式 */
+.text-xs {
+  font-size: var(--font-size-xs);
+}
+.text-sm {
+  font-size: var(--font-size-sm);
+}
+.text-md {
+  font-size: var(--font-size-md);
+}
+.text-lg {
+  font-size: var(--font-size-lg);
+}
+.text-xl {
+  font-size: var(--font-size-xl);
+}
+.text-2xl {
+  font-size: var(--font-size-2xl);
+}
+
+.text-primary {
+  color: var(--color-primary);
+}
+.text-secondary {
+  color: var(--color-secondary);
+}
+.text-success {
+  color: var(--color-success);
+}
+.text-warning {
+  color: var(--color-warning);
+}
+.text-danger {
+  color: var(--color-danger);
+}
+.text-info {
+  color: var(--color-info);
+}
+
+.font-weight-normal {
+  font-weight: 400;
+}
+.font-weight-medium {
+  font-weight: 500;
+}
+.font-weight-bold {
+  font-weight: 700;
+}
+
+/* 背景色 */
+.bg-primary {
+  background-color: var(--color-primary);
+}
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+.bg-success {
+  background-color: var(--color-success);
+}
+.bg-warning {
+  background-color: var(--color-warning);
+}
+.bg-danger {
+  background-color: var(--color-danger);
+}
+.bg-info {
+  background-color: var(--color-info);
+}
+
+.mt-sm {
+  margin-top: 8px;
+}
+
+.mt-md {
+  margin-top: 12px;
+}
+
+.mt-lg {
+  margin-top: 16px;
+}
+
+.mt-xl {
+  margin-top: 24px;
+}
+
+.mt-2xl {
+  margin-top: 32px;
+}
+
+.mb-xs {
+  margin-bottom: 4px;
+}
+
+.mb-sm {
+  margin-bottom: 8px;
+}
+
+.mb-md {
+  margin-bottom: 12px;
+}
+
+.mb-lg {
+  margin-bottom: 16px;
+}
+
+.mb-xl {
+  margin-bottom: 24px;
+}
+
+.mb-2xl {
+  margin-bottom: 32px;
+}
+
+.my-xs {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.my-sm {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.my-md {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.my-lg {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.my-xl {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.px-xs {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.px-sm {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.px-md {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.px-lg {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.px-xl {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.py-xs {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.py-sm {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.py-md {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.py-lg {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.py-xl {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+/* 文本样式 */
+.text-xs {
+  font-size: var(--font-size-xs);
+}
+
+.text-sm {
+  font-size: var(--font-size-sm);
+}
+
+.text-md {
+  font-size: var(--font-size-md);
+}
+
+.text-lg {
+  font-size: var(--font-size-lg);
+}
+
+.text-xl {
+  font-size: var(--font-size-xl);
+}
+
+.text-2xl {
+  font-size: var(--font-size-2xl);
+}
+
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-secondary {
+  color: var(--color-secondary);
+}
+
+.text-success {
+  color: var(--color-success);
+}
+
+.text-warning {
+  color: var(--color-warning);
+}
+
+.text-danger {
+  color: var(--color-danger);
+}
+
+.text-info {
+  color: var(--color-info);
+}
+
+.font-weight-normal {
+  font-weight: 400;
+}
+
+.font-weight-medium {
+  font-weight: 500;
+}
+
+.font-weight-bold {
+  font-weight: 700;
+}
+
+/* 背景色 */
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+
+.bg-success {
+  background-color: var(--color-success);
+}
+
+.bg-warning {
+  background-color: var(--color-warning);
+}
+
+.bg-danger {
+  background-color: var(--color-danger);
+}
+
+.bg-info {
+  background-color: var(--color-info);
+}

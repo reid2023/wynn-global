@@ -1,0 +1,127 @@
+/**
+ * LESS 重置样式
+ * 删除所有元素的默认样式，为项目提供一致的基础
+ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  // 防止文本以 999em 的大小设置后改为 999px
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  background-color: #f5f5f5;
+  color: #333;
+  line-height: 1.5;
+  // 防止点击延迟（300ms tap delay）- iOS Safari 兼容性
+  touch-action: manipulation;
+  // 防止滚动闪烁
+  -webkit-overflow-scrolling: touch;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  // 移除 iOS Safari 点击时的光晕
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+/* 输入框移动端优化 */
+input[type='text'],
+input[type='email'],
+input[type='number'],
+input[type='password'],
+input[type='search'],
+input[type='tel'],
+input[type='url'],
+textarea {
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0;
+}
+
+/* 按钮移动端优化 */
+button {
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  background: none;
+  // 防止长按菜单
+  -webkit-touch-callout: none;
+  // 禁用点击亮光效果
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* 防止虚拟键盘导致的布局抖动 */
+input,
+textarea,
+select {
+  // 禁用自动缩放虚拟键盘
+  -webkit-user-select: text;
+}
+
+/* 链接的焦点状态 */
+a:focus,
+button:focus {
+  outline: none;
+}
+
+/* 防止 iOS 中的 select 箭头问题 */
+select {
+  background-image: none;
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: 1em;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23333" d="M6 9L1 4h10z"/></svg>')
+    right center no-repeat;
+  background-size: 12px;
+  padding-right: 2em;
+}
+
+/* img 标签优化 */
+img {
+  max-width: 100%;
+  height: auto;
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* 防止 iOS 长按单词时的选择效果 */
+body {
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* 恢复可交互元素的用户选择 */
+button,
+a,
+input[type='button'],
+input[type='submit'],
+input[type='radio'],
+input[type='checkbox'] {
+  -webkit-user-select: none;
+  user-select: none;
+}

@@ -1,0 +1,52 @@
+{
+  "home": "Home",
+  "discount": "Discount",
+  "service": "Service",
+  "support": "Support",
+  "mine": "Mine",
+  "about": "About",
+  "notFound": "Not Found",
+  "welcome": "Welcome to Wynn Global",
+  "description": "A high-performance Vue3 mobile application",
+  "features": "Features",
+  "internationalization": "Internationalization (i18n)",
+  "routingAndCodeSplitting": "Routing & Code Splitting",
+  "lightweightAndFast": "Lightweight & Fast",
+  "typescript": "TypeScript Support",
+  "pwa": "Progressive Web App (PWA)",
+  "mobileOptimized": "Mobile Optimized",
+  "switchLanguage": "Switch Language",
+  "common": {
+    "copied": "Copied",
+    "fillRequired": "Please fill in all required fields",
+    "logout": "Logout"
+  },
+  "licenses": {
+    "title": "Licenses & Certifications",
+    "complianceCommitment": "Our Compliance Commitment",
+    "complianceText": "For your protection, Wynn Global hereby states:",
+    "licensedOperation": "1.Licensed Operation:",
+    "licensedOperationDesc": "We hold a valid license issued by the [United Kingdom Gambling Commission]",
+    "licenseNumber": "(License No: 000-052895-R-329549-001).",
+    "fairGaming": "2.Fair Gaming:",
+    "fairGamingDesc": "Our games are independently certified for fairness and RNG by [iTech Labs].",
+    "safety": "3.Safety & Responsibility:",
+    "safetyDesc": "We enforce strict age verification (18+/21+) and provide responsible gaming tools.",
+    "commissionLink": "https://www.gov.uk/government/organisations/gambling-commission",
+    "itechLink": "https://www.itechlabs.com"
+  },
+  "profile": {
+    "title": "Personal Information",
+    "myAccount": "My Account",
+    "security": "Security",
+    "phone": "Phone Number",
+    "phonePlaceholder": "Enter your phone number",
+    "oldPasswordPlaceholder": "Please enter your original password",
+    "newPasswordPlaceholder": "Please enter a new password of 6-12 digits",
+    "uploadSuccess": "Photo uploaded successfully",
+    "avatarSelected": "Avatar selected",
+    "logout": "Logout",
+    "passwordChanged": "Password changed successfully",
+    "passwordLengthError": "Password must be 6-12 digits"
+  }
+}
