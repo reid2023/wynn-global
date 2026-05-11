@@ -32,6 +32,30 @@ pnpm preview
 pnpm type-check
 ```
 
+### Capacitor
+
+```bash
+# 1. 安装依赖
+nvm use 22
+npm add -D @capacitor/core @capacitor/cli
+npx cap init
+
+# 2. 项目打包
+npm build
+
+# 3. 添加原生平台支持
+npm install -D @capacitor/android @capacitor/ios
+npm cap add android
+npm cap add ios
+
+# 6. 将打包后的 dist 资源同步到原生工程
+npx cap sync
+
+# 7. 打开原生开发工具进行调试/打包
+npx cap open android  # 自动打开 Android Studio
+npx cap open ios      # 自动打开 Xcode
+```
+
 ## 📁 项目结构
 
 ```
