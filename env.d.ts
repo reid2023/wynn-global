@@ -1,3 +1,4 @@
+/// <reference lib="ES2020" />
 /// <reference types="vite/client" />
 
 declare module '*.vue' {

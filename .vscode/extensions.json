@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "Vue.volar",
+    "MS-CEINTL.vscode-language-pack-zh-hans"
+  ],
+  "unwantedRecommendations": ["octref.vetur"]
+}

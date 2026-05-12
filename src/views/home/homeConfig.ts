@@ -39,6 +39,22 @@ export interface NavMenuItem {
   value: string;
 }
 
+/** 首页左侧游戏厂商卡片 */
+export interface GameProviderCard {
+  id: string;
+  name: string;
+  icon: string;
+  rows: PlayerInfo[];
+}
+
+/** 右侧厂商下的游戏格子项 */
+export interface ProviderGridGame {
+  id: number;
+  title: string;
+  subtitle: string;
+  cover: string;
+}
+
 // ==================== 配置常量 ====================
 
 /**
@@ -169,3 +185,104 @@ export const GAME_CARDS: GameCard[] = [
     ],
   },
 ];
+
+// ---------- 游戏厂商 + 各厂商游戏列表（可后续替换为接口） ----------
+
+const avatarUrl = new URL('@/assets/imgs/public/tx_big.png', import.meta.url).href;
+const brFlag = new URL('@/assets/imgs/country/br.png', import.meta.url).href;
+const deFlag = new URL('@/assets/imgs/country/de.png', import.meta.url).href;
+
+export const GAME_PROVIDER_CARDS: GameProviderCard[] = [
+  {
+    id: 'ct',
+    name: 'CT INTERACTIVE',
+    icon: new URL('@/assets/imgs/company/1.png', import.meta.url).href,
+    rows: [
+      { avatar: avatarUrl, countryImg: brFlag, balance: '1234.56' },
+      { avatar: avatarUrl, countryImg: deFlag, balance: '8765.43' },
+    ],
+  },
+  {
+    id: 'agt',
+    name: 'AGT SOFTWARE',
+    icon: new URL('@/assets/imgs/company/2.png', import.meta.url).href,
+    rows: [
+      { avatar: avatarUrl, countryImg: deFlag, balance: '2341.09' },
+      { avatar: avatarUrl, countryImg: brFlag, balance: '5520.88' },
+    ],
+  },
+  {
+    id: 'pg',
+    name: 'PG SOFT',
+    icon: new URL('@/assets/imgs/company/3.png', import.meta.url).href,
+    rows: [
+      { avatar: avatarUrl, countryImg: brFlag, balance: '998.12' },
+      { avatar: avatarUrl, countryImg: deFlag, balance: '3400.00' },
+    ],
+  },
+  {
+    id: 'pp',
+    name: 'PRAGMATIC PLAY',
+    icon: new URL('@/assets/imgs/company/4.png', import.meta.url).href,
+    rows: [
+      { avatar: avatarUrl, countryImg: brFlag, balance: '7654.32' },
+      { avatar: avatarUrl, countryImg: deFlag, balance: '1122.45' },
+    ],
+  },
+];
+
+const gameUrl =
+  'https://content001.bet365.com/Games/SGP/GamePodImages/ChineseTigers_1000x400_With-Character.jpg';
+
+const GAMES_BY_PROVIDER: Record<string, ProviderGridGame[]> = {
+  ct: [
+    {
+      id: 101,
+      title: 'RIP CITY',
+      subtitle: 'CT INTERACTIVE',
+      cover: gameUrl,
+    },
+    { id: 102, title: 'FORTUNE BINGO', subtitle: 'CT INTERACTIVE', cover: gameUrl },
+    { id: 103, title: 'ULTRA WHEEL', subtitle: 'CT INTERACTIVE', cover: gameUrl },
+    { id: 104, title: 'ÇARKIFELEK', subtitle: 'CT INTERACTIVE', cover: gameUrl },
+    { id: 105, title: '100', subtitle: 'CT INTERACTIVE', cover: gameUrl },
+    { id: 106, title: 'VIP', subtitle: 'CT INTERACTIVE', cover: gameUrl },
+  ],
+  agt: [
+    { id: 201, title: 'NIGHT OWL', subtitle: 'AGT SOFTWARE', cover: gameUrl },
+    { id: 202, title: 'LUCKY SPIN', subtitle: 'AGT SOFTWARE', cover: gameUrl },
+    { id: 203, title: 'GOLD RUSH', subtitle: 'AGT SOFTWARE', cover: gameUrl },
+    { id: 204, title: 'MEGA LINE', subtitle: 'AGT SOFTWARE', cover: gameUrl },
+    { id: 205, title: 'RIO BLAST', subtitle: 'AGT SOFTWARE', cover: gameUrl },
+    { id: 206, title: 'SAMBA WIN', subtitle: 'AGT SOFTWARE', cover: gameUrl },
+  ],
+  pg: [
+    { id: 301, title: 'DRAGON HATCH', subtitle: 'PG SOFT', cover: gameUrl },
+    { id: 302, title: 'SWEET BONANZA', subtitle: 'PG SOFT', cover: gameUrl },
+    { id: 303, title: 'TREE GOLD', subtitle: 'PG SOFT', cover: gameUrl },
+    { id: 304, title: 'JUNGLE RUN', subtitle: 'PG SOFT', cover: gameUrl },
+    { id: 305, title: 'COIN PARTY', subtitle: 'PG SOFT', cover: gameUrl },
+    { id: 306, title: 'STAR FALL', subtitle: 'PG SOFT', cover: gameUrl },
+  ],
+  pp: [
+    { id: 401, title: 'BIG BASS', subtitle: 'PRAGMATIC PLAY', cover: gameUrl },
+    { id: 402, title: 'GATES OF OLYMPUS', subtitle: 'PRAGMATIC PLAY', cover: gameUrl },
+    { id: 403, title: 'SUGAR RUSH', subtitle: 'PRAGMATIC PLAY', cover: gameUrl },
+    { id: 404, title: 'FRUIT PARTY', subtitle: 'PRAGMATIC PLAY', cover: gameUrl },
+    { id: 405, title: 'WILD WEST', subtitle: 'PRAGMATIC PLAY', cover: gameUrl },
+    {
+      id: 406,
+      title: 'MAGIC BOOK',
+      subtitle: 'PRAGMATIC PLAY',
+      cover: gameUrl,
+    },
+  ],
+};
+
+/**
+ * 模拟按厂商拉取游戏列表（后续换成真实 API）
+ */
+export async function fetchGamesByProvider(providerId: string): Promise<ProviderGridGame[]> {
+  await new Promise((r) => setTimeout(r, 320));
+  return GAMES_BY_PROVIDER[providerId] ?? [];
+}
