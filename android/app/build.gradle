@@ -13,12 +13,9 @@ android {
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
              // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/AaptAssets.cpp#61
-            ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
+             // Exclude precompressed .gz siblings (vite-plugin-compression) — must use !*.gz, not !.gz
+            ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~:!*.gz:!*.GZ'
         }
-    }
-    // 📌 添加下面这段代码，让安卓打包时过滤掉 .gz 压缩包
-    aaptOptions {
-        ignoreAssetsPattern "!.gz:!.GZ"
     }
     buildTypes {
         release {

@@ -1,0 +1,5 @@
+# pnpm 11：允许依赖执行安装脚本（esbuild 原生二进制、vue-demi 的 postinstall）
+# 见 https://pnpm.io/settings#allowbuilds
+allowBuilds:
+  esbuild: true
+  vue-demi: true
