@@ -204,6 +204,10 @@ const onAfterLeave = () => {
   left: 0;
   right: 0;
   bottom: 0;
+  width: 100%;
+  /* 键盘弹出时避免仅靠 bottom:0 在部分 WebView 下高度缺口露出底色 */
+  min-height: 100%;
+  min-height: 100dvh;
   background: rgba(0, 0, 0, 0.7);
   z-index: 998;
   backdrop-filter: blur(2px);
@@ -216,6 +220,7 @@ const onAfterLeave = () => {
   transform: translate(-50%, -50%);
   z-index: 999;
   max-height: 90vh;
+  max-height: 90dvh;
 }
 
 /* 遮罩过渡动画 */

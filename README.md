@@ -54,6 +54,9 @@ npx cap sync
 # 7. 打开原生开发工具进行调试/打包
 npx cap open android  # 自动打开 Android Studio
 npx cap open ios      # 自动打开 Xcode
+
+# 8. build apk
+pnpm run android:debug:remote
 ```
 
 ## 📁 项目结构

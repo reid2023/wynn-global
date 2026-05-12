@@ -142,3 +142,9 @@
   --safe-area-left: 0;
   --safe-area-right: 0;
 }
+
+/* 页面底色与主题一致，避免 Android WebView 键盘顶起时固定层错位露出默认灰/白底 */
+html,
+body {
+  background-color: var(--color-bg);
+}
