@@ -30,12 +30,13 @@ const useInit = () => {
 
     // 创建任务列表用于加载跟踪
     const tasks = [
-      { name: '钱包数据', fn: () => walletStore.fetchUserWallet() },
-      { name: '可领取活动', fn: () => activeStore.fetchAvailableActivities() },
-      { name: '救援金配置', fn: () => specialActivityStore.fetchRescueOffer() },
-      { name: 'VIP等级', fn: () => vipStore.fetchVipLevelList() },
-      { name: '首充活动', fn: () => activeStore.fetchFirstRechargeConfig() },
-      { name: '充值档位', fn: () => walletStore.fetchRechargeAmountConfig() },
+      { name: '钱包数据', fn: () => userStore.getUserProfile() },
+      // { name: '钱包数据', fn: () => walletStore.fetchUserWallet() },
+      // { name: '可领取活动', fn: () => activeStore.fetchAvailableActivities() },
+      // { name: '救援金配置', fn: () => specialActivityStore.fetchRescueOffer() },
+      // { name: 'VIP等级', fn: () => vipStore.fetchVipLevelList() },
+      // { name: '首充活动', fn: () => activeStore.fetchFirstRechargeConfig() },
+      // { name: '充值档位', fn: () => walletStore.fetchRechargeAmountConfig() },
     ];
 
     // 并行执行所有任务

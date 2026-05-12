@@ -289,7 +289,7 @@ const handleClaimVipUpgrade = async () => {
     isSubmitting.value = true;
     const data = {
       level: currentVipLevel.value,
-      user_id: userProfile.value?.user_id ?? '',
+      user_id: userProfile.value?.playerId ?? '',
     };
 
     await vipApi.claimVipUpgrade(data);

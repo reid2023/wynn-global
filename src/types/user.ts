@@ -4,41 +4,39 @@ import { ApiResponse } from './api';
  * 登录请求数据
  */
 export interface LoginPayload {
-  phone: string;
+  areaCode: string | number;
+  mobile: string;
   password: string;
-  country_code?: string;
 }
 
 /**
  * 登录响应数据
  */
-export type LoginResponse = ApiResponse<{
-  token: string;
-  user_id: string;
-}>;
+export type LoginResponse = ApiResponse<string>;
 
 /**
  * 注册请求数据
  */
 export interface RegisterPayload {
-  phone: string;
+  areaCode: string | number;
+  mobile: string;
   password: string;
-  country_code?: string;
-  inviter_code?: string;
+  password2: string;
+  inviteCode?: string;
 }
 
 /**
  * 注册响应数据
  */
-export type RegisterResponse = ApiResponse<{
-  token: string;
-  user_id: string;
-}>;
+export type RegisterResponse = ApiResponse<string>;
 
 /**
  * 用户信息
  */
 export interface UserProfile {
+  playerId: string;
+  currency: string;
+  balance: string;
   user_id: string;
   avatar: string;
   nickname: string;

@@ -16,7 +16,7 @@
         <div class="phone-input-wrapper">
           <CountrySelect v-model="form.countryCode" :allow-select="false" />
           <FormInput
-            v-model="form.phone"
+            v-model="form.mobile"
             type="phone"
             :max-length="11"
             backgroundImageType="phone"
@@ -41,7 +41,7 @@
       <div class="form-group">
         <label class="form-label text-gradient-gold">Confirmar Senha</label>
         <FormInput
-          v-model="form.confirmPassword"
+          v-model="form.password2"
           type="password"
           :allow-password="true"
           placeholder="Insira a senha novamente"
@@ -112,9 +112,9 @@ const getDefaultAult = () => {
 
 // 表单数据
 const form = ref({
-  phone: '',
+  mobile: '',
   password: '',
-  confirmPassword: '',
+  password2: '',
   countryCode: 'BR',
   isAdult: getDefaultAult(),
 });
@@ -135,7 +135,7 @@ watch(
 
 // 创建表单校验器
 const validator = createFormValidator({
-  phone: {
+  mobile: {
     required: true,
     ...predefinedRules.brPhone,
   },
@@ -143,7 +143,7 @@ const validator = createFormValidator({
     required: true,
     ...predefinedRules.password,
   },
-  confirmPassword: {
+  password2: {
     required: true,
   },
 });
@@ -154,9 +154,9 @@ const validator = createFormValidator({
 const handleRegister = async () => {
   // 验证表单
   const validationResult = validator.validateAll({
-    phone: form.value.phone,
+    mobile: form.value.mobile,
     password: form.value.password,
-    confirmPassword: form.value.confirmPassword,
+    password2: form.value.password2,
   });
 
   if (!validationResult.valid) {
@@ -167,7 +167,7 @@ const handleRegister = async () => {
   }
 
   // 验证密码是否一致
-  if (form.value.password !== form.value.confirmPassword) {
+  if (form.value.password !== form.value.password2) {
     showToast('As senhas não coincidem');
     return;
   }
@@ -190,9 +190,13 @@ const handleRegister = async () => {
 
     // Chamar API de registro
     const response = await userApi.register({
-      phone: `${Number(countrieItem?.dialCode)}|${form.value.phone}`,
-      password: md5(form.value.password),
-      country_code: form.value.countryCode,
+      mobile: form.value.mobile,
+      // password: md5(form.value.password),
+      // password2: md5(form.value.password),
+      password: form.value.password,
+      password2: form.value.password2,
+      // areaCode: form.value.countryCode,
+      areaCode: Number(countrieItem?.dialCode),
     });
 
     if (response.data) {
@@ -200,7 +204,7 @@ const handleRegister = async () => {
 
       dialogStore.closeDialog(props.dialogId);
       // 更新用户信息
-      userStore.setIsLoggedIn(response.data.token);
+      userStore.setIsLoggedIn(response.data);
 
       // 执行登录后初始化
       initAfterLogin();

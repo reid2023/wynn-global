@@ -8,7 +8,7 @@
             <img :src="userAvatar" alt="avatar" class="user-avatar" />
           </div>
           <div class="user-info">
-            <div class="user-id">ID:{{ userProfile?.user_id ?? '-' }}</div>
+            <div class="user-id">ID:{{ userProfile?.playerId ?? '-' }}</div>
             <div class="user-balance" @click="handleRecharge">
               <img src="@/assets/imgs/home/jb.png" alt="jb" />
               <span class="text-gradient-gold balance-amount">{{

@@ -244,7 +244,7 @@ const form = ref({
 
 // ==================== 方法 ====================
 
-const userID = computed(() => userProfile.value?.user_id ?? '-');
+const userID = computed(() => userProfile.value?.playerId ?? '-');
 const userBalance = computed(() =>
   formatCurrency(userWalletBalance.value.balance ?? 0, undefined, '', 'pt-BR', {
     minimumFractionDigits: 2,

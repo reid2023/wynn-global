@@ -82,9 +82,9 @@ export default defineConfig({
     strictPort: false,
     proxy: {
       '/api': {
-        target: 'https://test_sm_api.wynnglobal.vip',
+        target: 'http://ec2-18-142-46-250.ap-southeast-1.compute.amazonaws.com:30088',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
+        // rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
   },

@@ -16,7 +16,7 @@
         <div class="phone-input-wrapper">
           <CountrySelect v-model="form.countryCode" :allow-select="false" />
           <FormInput
-            v-model="form.phone"
+            v-model="form.mobile"
             type="phone"
             :max-length="11"
             backgroundImageType="phone"
@@ -89,7 +89,7 @@ const dialogStore = useDialogStore();
 
 // 表单数据
 const form = ref({
-  phone: '',
+  mobile: '',
   password: '',
   countryCode: 'BR',
 });
@@ -102,7 +102,7 @@ const { initAfterLogin } = useInit();
 
 // 创建表单校验器
 const validator = createFormValidator({
-  phone: {
+  mobile: {
     required: true,
     ...predefinedRules.brPhone,
   },
@@ -118,7 +118,7 @@ const validator = createFormValidator({
 const handleLogin = async () => {
   // 验证表单
   const validationResult = validator.validateAll({
-    phone: form.value.phone,
+    mobile: form.value.mobile,
     password: form.value.password,
   });
 
@@ -141,10 +141,12 @@ const handleLogin = async () => {
 
     // 调用登录 API，密码使用 MD5 加密
     const response = await userApi.login({
-      // phone: form.value.phone,
-      phone: `${Number(countrieItem?.dialCode)}|${form.value.phone}`,
-      password: md5(form.value.password),
-      country_code: form.value.countryCode,
+      mobile: form.value.mobile,
+      // phone: `${Number(countrieItem?.dialCode)}|${form.value.mobile}`,
+      // password: md5(form.value.password),
+      password: form.value.password,
+      // areaCode: form.value.countryCode,
+      areaCode: Number(countrieItem?.dialCode),
     });
 
     if (response.data) {
@@ -152,7 +154,7 @@ const handleLogin = async () => {
 
       dialogStore.closeDialog(props.dialogId);
       // 更新用户信息
-      userStore.setIsLoggedIn(response.data.token);
+      userStore.setIsLoggedIn(response.data);
 
       // 执行登录后初始化
       initAfterLogin();

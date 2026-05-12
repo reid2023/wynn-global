@@ -20,7 +20,7 @@ import {
  * @returns 登录结果，成功时 code=0，失败时会 throw error
  */
 export async function login(payload: LoginPayload): Promise<LoginResponse> {
-  return await api.post<LoginResponse>('/user/login', payload);
+  return await api.post<LoginResponse>('/login', payload);
 }
 
 /**
@@ -30,7 +30,7 @@ export async function login(payload: LoginPayload): Promise<LoginResponse> {
  * @returns 注册结果，成功时 code=0，失败时会 throw error
  */
 export async function register(payload: RegisterPayload): Promise<RegisterResponse> {
-  return await api.post<RegisterResponse>('/user/register', payload);
+  return await api.post<RegisterResponse>('/register', payload);
 }
 
 /**
@@ -58,11 +58,11 @@ export async function checkPhoneExists(phone: string, countryCode: string): Prom
 
 /**
  * 获取用户信息 API
- * GET /user/profile
+ * GET /getInfo
  * @returns 用户信息，成功时 code=0，失败时会 throw error
  */
 export async function getUserProfile(): Promise<GetProfileResponse> {
-  return await api.get<GetProfileResponse>('/user/profile');
+  return await api.get<GetProfileResponse>('/getInfo');
 }
 
 /**
