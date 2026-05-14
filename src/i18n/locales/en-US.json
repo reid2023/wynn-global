@@ -19,7 +19,10 @@
   "common": {
     "copied": "Copied",
     "fillRequired": "Please fill in all required fields",
-    "logout": "Logout"
+    "logout": "Logout",
+    "back": "Back",
+    "gameLoading": "Loading…",
+    "gameLoadSlow": "This is taking longer than usual. You can keep waiting or go back and try again."
   },
   "licenses": {
     "title": "Licenses & Certifications",

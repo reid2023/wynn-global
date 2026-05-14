@@ -19,7 +19,10 @@
   "common": {
     "copied": "Copiado com sucesso",
     "fillRequired": "Por favor, preencha todos os campos obrigatórios",
-    "logout": "Sair"
+    "logout": "Sair",
+    "back": "Voltar",
+    "gameLoading": "Carregando…",
+    "gameLoadSlow": "Está demorando mais que o normal. Você pode aguardar ou voltar e tentar novamente."
   },
   "licenses": {
     "title": "LICENSES & CERTIFICATIONS",

@@ -47,6 +47,12 @@
         </button>
       </div>
     </div>
+
+    <GameIframeContainer
+      v-if="embeddedGameUrl"
+      :src="embeddedGameUrl"
+      @close="embeddedGameUrl = null"
+    />
   </div>
 </template>
 
@@ -56,11 +62,12 @@ import { GAME_COMPANY_MAP, RANDOM_PLAYER_ROWS_100, type PlayerInfo } from '../ho
 import { gameApi } from '@/services';
 import { isArray } from 'lodash-es';
 import { GameCategoryItem, GameListItem } from '@/types/game';
-import { safeOpenUrl } from '@/utils/navigation';
+import GameIframeContainer from '@/components/game/GameIframeContainer.vue';
 import { createWinRowsPicker } from '@/utils/winRowsPicker';
 
 const loading = ref(false);
 const isOpenGame = ref(false);
+const embeddedGameUrl = ref<string | null>(null);
 
 // 游戏分类
 const gameCategory = ref<GameCategoryItem[]>([]);
@@ -104,7 +111,7 @@ const handleGameClick = async (game: GameListItem) => {
 
     const url = result.data?.url;
     if (url) {
-      safeOpenUrl(url);
+      embeddedGameUrl.value = url;
     }
   } finally {
     isOpenGame.value = false;
