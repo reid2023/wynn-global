@@ -3,7 +3,7 @@
     <!-- 左侧：游戏厂商 -->
     <aside class="provider-sidebar">
       <button
-        v-for="p in GAME_PROVIDER_CARDS"
+        v-for="p in gameCategory"
         :key="p.id"
         type="button"
         class="provider-card"
@@ -14,7 +14,7 @@
           <img :src="p.icon" alt="icon" />
         </div>
         <div class="provider-rows">
-          <div v-for="(row, idx) in p.rows" :key="idx" class="provider-row">
+          <div v-for="(row, idx) in p.wins" :key="idx" class="provider-row">
             <img :src="row.avatar" alt="" class="row-avatar" />
             <img :src="row.countryImg" alt="" class="row-flag" />
             <span class="row-balance text-gradient-gold">
@@ -38,12 +38,12 @@
           class="grid-game-card"
           @click="handleGameClick(g)"
         >
-          <img :src="g.cover" :alt="g.title" class="grid-cover" />
+          <img :src="g.image" :alt="g.name" class="grid-cover" />
           <div class="grid-gradient" />
-          <div class="grid-text">
+          <!-- <div class="grid-text">
             <div class="grid-title">{{ g.title }}</div>
             <div class="grid-sub">{{ g.subtitle }}</div>
-          </div>
+          </div> -->
         </button>
       </div>
     </div>
@@ -51,38 +51,126 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { GAME_PROVIDER_CARDS, fetchGamesByProvider, type ProviderGridGame } from '../homeConfig';
+import { ref, onMounted, onUnmounted } from 'vue';
+import { GAME_COMPANY_MAP, RANDOM_PLAYER_ROWS_100, type PlayerInfo } from '../homeConfig';
+import { gameApi } from '@/services';
+import { isArray } from 'lodash-es';
+import { GameCategoryItem, GameListItem } from '@/types/game';
+import { safeOpenUrl } from '@/utils/navigation';
+import { createWinRowsPicker } from '@/utils/winRowsPicker';
 
-const selectedProviderId = ref<any>(GAME_PROVIDER_CARDS?.[0]?.id ?? '');
-const displayedGames = ref<ProviderGridGame[]>([]);
 const loading = ref(false);
+const isOpenGame = ref(false);
 
-const loadGames = async (providerId: string): Promise<any> => {
-  loading.value = true;
-  displayedGames.value = [];
+// 游戏分类
+const gameCategory = ref<GameCategoryItem[]>([]);
+/** 每个分类独立一套 wins 取样历史，避免互相污染 */
+const winPickersByCategoryId = new Map<number, ReturnType<typeof createWinRowsPicker>>();
+
+let winsRefreshTimer: ReturnType<typeof setInterval> | undefined;
+
+function refreshAllCategoryWins() {
+  gameCategory.value = gameCategory.value.map((cat) => {
+    const picker = winPickersByCategoryId.get(cat.id);
+    return {
+      ...cat,
+      wins: picker ? picker.pickTwo() : cat.wins,
+    };
+  });
+}
+
+// 游戏列表
+const displayedGames = ref<GameListItem[]>([]);
+// 选中的分类
+const selectedProviderId = ref<any>('');
+
+function selectProvider(id: string | number) {
+  if (id === selectedProviderId.value) return;
+  selectedProviderId.value = id;
+  getGameList(id);
+}
+
+/**
+ * 点击游戏
+ */
+const handleGameClick = async (game: GameListItem) => {
+  if (isOpenGame.value) {
+    return;
+  }
+
   try {
-    displayedGames.value = await fetchGamesByProvider(providerId);
+    isOpenGame.value = true;
+    const result = await gameApi.openGame(game.gameId);
+
+    const url = result.data?.url;
+    if (url) {
+      safeOpenUrl(url);
+    }
+  } finally {
+    isOpenGame.value = false;
+  }
+};
+
+/**
+ * 获取游戏分类
+ */
+const getGameCategory = async () => {
+  const result = await gameApi.getGameCategory();
+
+  if (isArray(result.data)) {
+    winPickersByCategoryId.clear();
+    gameCategory.value = (result.data ?? []).map((item, idx) => {
+      const picker = createWinRowsPicker(RANDOM_PLAYER_ROWS_100);
+      winPickersByCategoryId.set(item.id, picker);
+      return {
+        id: item.id,
+        title: item.title,
+        icon: GAME_COMPANY_MAP[idx + 1],
+        wins: picker.pickTwo() as PlayerInfo[],
+      };
+    });
+
+    selectedProviderId.value = gameCategory.value[0].id;
+
+    if (winsRefreshTimer) {
+      clearInterval(winsRefreshTimer);
+    }
+    winsRefreshTimer = setInterval(refreshAllCategoryWins, 5000);
+  }
+};
+
+/**
+ * 获取游戏列表
+ */
+const getGameList = async (providerId: string | number) => {
+  try {
+    loading.value = true;
+    const result = await gameApi.getGameList({
+      categoryIds: [providerId],
+    });
+
+    if (result.data) {
+      displayedGames.value = result.data[providerId] ?? [];
+    }
   } finally {
     loading.value = false;
   }
-  return;
 };
 
-function selectProvider(id: string) {
-  if (id === selectedProviderId.value) return;
-  selectedProviderId.value = id;
-  loadGames(id);
-}
+onMounted(async () => {
+  await getGameCategory();
 
-const handleGameClick = (game: ProviderGridGame) => {
-  console.log('Game clicked:', game.title, game.id);
-};
-
-onMounted(() => {
   if (selectedProviderId.value) {
-    loadGames(selectedProviderId.value);
+    await getGameList(selectedProviderId.value);
   }
+});
+
+onUnmounted(() => {
+  if (winsRefreshTimer) {
+    clearInterval(winsRefreshTimer);
+    winsRefreshTimer = undefined;
+  }
+  winPickersByCategoryId.clear();
 });
 </script>
 

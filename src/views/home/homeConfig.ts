@@ -129,160 +129,108 @@ export const NAV_ITEMS: NavMenuItem[] = [
   },
 ];
 
-/**
- * 热门游戏卡片列表
- */
-export const GAME_CARDS: GameCard[] = [
-  {
-    id: 1,
-    title: 'ÇARKIFELEK',
-    image: new URL('@/assets/imgs/home/k1.png', import.meta.url).href,
-    players: [
-      {
-        avatar: new URL('@/assets/imgs/public/tx_big.png', import.meta.url).href,
-        countryImg: new URL('@/assets/imgs/country/br.png', import.meta.url).href,
-        balance: '11123.11',
-      },
-      {
-        avatar: new URL('@/assets/imgs/public/tx_big.png', import.meta.url).href,
-        countryImg: new URL('@/assets/imgs/country/de.png', import.meta.url).href,
-        balance: '12323.23',
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: '100',
-    image: new URL('@/assets/imgs/home/k2.png', import.meta.url).href,
-    players: [
-      {
-        avatar: new URL('@/assets/imgs/public/tx_big.png', import.meta.url).href,
-        countryImg: new URL('@/assets/imgs/country/br.png', import.meta.url).href,
-        balance: '1323.23',
-      },
-      {
-        avatar: new URL('@/assets/imgs/public/tx_big.png', import.meta.url).href,
-        countryImg: new URL('@/assets/imgs/country/de.png', import.meta.url).href,
-        balance: '123.89',
-      },
-    ],
-  },
-  {
-    id: 3,
-    title: 'VIP',
-    image: new URL('@/assets/imgs/home/k3.png', import.meta.url).href,
-    players: [
-      {
-        avatar: new URL('@/assets/imgs/public/tx_big.png', import.meta.url).href,
-        countryImg: new URL('@/assets/imgs/country/br.png', import.meta.url).href,
-        balance: '884.23',
-      },
-      {
-        avatar: new URL('@/assets/imgs/public/tx_big.png', import.meta.url).href,
-        countryImg: new URL('@/assets/imgs/country/de.png', import.meta.url).href,
-        balance: '6623.11',
-      },
-    ],
-  },
-];
-
 // ---------- 游戏厂商 + 各厂商游戏列表（可后续替换为接口） ----------
+/** public/flag 的 URL 前缀（含 BASE_URL，与 Vite 部署子路径一致） */
+const _appBase = import.meta.env.BASE_URL || '/';
+const FLAG_PUBLIC_PREFIX = `${_appBase.endsWith('/') ? _appBase : `${_appBase}/`}flag/`;
 
-const avatarUrl = new URL('@/assets/imgs/public/tx_big.png', import.meta.url).href;
-const brFlag = new URL('@/assets/imgs/country/br.png', import.meta.url).href;
-const deFlag = new URL('@/assets/imgs/country/de.png', import.meta.url).href;
-
-export const GAME_PROVIDER_CARDS: GameProviderCard[] = [
-  {
-    id: 'ct',
-    name: 'CT INTERACTIVE',
-    icon: new URL('@/assets/imgs/company/1.png', import.meta.url).href,
-    rows: [
-      { avatar: avatarUrl, countryImg: brFlag, balance: '1234.56' },
-      { avatar: avatarUrl, countryImg: deFlag, balance: '8765.43' },
-    ],
-  },
-  {
-    id: 'agt',
-    name: 'AGT SOFTWARE',
-    icon: new URL('@/assets/imgs/company/2.png', import.meta.url).href,
-    rows: [
-      { avatar: avatarUrl, countryImg: deFlag, balance: '2341.09' },
-      { avatar: avatarUrl, countryImg: brFlag, balance: '5520.88' },
-    ],
-  },
-  {
-    id: 'pg',
-    name: 'PG SOFT',
-    icon: new URL('@/assets/imgs/company/3.png', import.meta.url).href,
-    rows: [
-      { avatar: avatarUrl, countryImg: brFlag, balance: '998.12' },
-      { avatar: avatarUrl, countryImg: deFlag, balance: '3400.00' },
-    ],
-  },
-  {
-    id: 'pp',
-    name: 'PRAGMATIC PLAY',
-    icon: new URL('@/assets/imgs/company/4.png', import.meta.url).href,
-    rows: [
-      { avatar: avatarUrl, countryImg: brFlag, balance: '7654.32' },
-      { avatar: avatarUrl, countryImg: deFlag, balance: '1122.45' },
-    ],
-  },
-];
-
-const gameUrl =
-  'https://content001.bet365.com/Games/SGP/GamePodImages/ChineseTigers_1000x400_With-Character.jpg';
-
-const GAMES_BY_PROVIDER: Record<string, ProviderGridGame[]> = {
-  ct: [
-    {
-      id: 101,
-      title: 'RIP CITY',
-      subtitle: 'CT INTERACTIVE',
-      cover: gameUrl,
-    },
-    { id: 102, title: 'FORTUNE BINGO', subtitle: 'CT INTERACTIVE', cover: gameUrl },
-    { id: 103, title: 'ULTRA WHEEL', subtitle: 'CT INTERACTIVE', cover: gameUrl },
-    { id: 104, title: 'ÇARKIFELEK', subtitle: 'CT INTERACTIVE', cover: gameUrl },
-    { id: 105, title: '100', subtitle: 'CT INTERACTIVE', cover: gameUrl },
-    { id: 106, title: 'VIP', subtitle: 'CT INTERACTIVE', cover: gameUrl },
-  ],
-  agt: [
-    { id: 201, title: 'NIGHT OWL', subtitle: 'AGT SOFTWARE', cover: gameUrl },
-    { id: 202, title: 'LUCKY SPIN', subtitle: 'AGT SOFTWARE', cover: gameUrl },
-    { id: 203, title: 'GOLD RUSH', subtitle: 'AGT SOFTWARE', cover: gameUrl },
-    { id: 204, title: 'MEGA LINE', subtitle: 'AGT SOFTWARE', cover: gameUrl },
-    { id: 205, title: 'RIO BLAST', subtitle: 'AGT SOFTWARE', cover: gameUrl },
-    { id: 206, title: 'SAMBA WIN', subtitle: 'AGT SOFTWARE', cover: gameUrl },
-  ],
-  pg: [
-    { id: 301, title: 'DRAGON HATCH', subtitle: 'PG SOFT', cover: gameUrl },
-    { id: 302, title: 'SWEET BONANZA', subtitle: 'PG SOFT', cover: gameUrl },
-    { id: 303, title: 'TREE GOLD', subtitle: 'PG SOFT', cover: gameUrl },
-    { id: 304, title: 'JUNGLE RUN', subtitle: 'PG SOFT', cover: gameUrl },
-    { id: 305, title: 'COIN PARTY', subtitle: 'PG SOFT', cover: gameUrl },
-    { id: 306, title: 'STAR FALL', subtitle: 'PG SOFT', cover: gameUrl },
-  ],
-  pp: [
-    { id: 401, title: 'BIG BASS', subtitle: 'PRAGMATIC PLAY', cover: gameUrl },
-    { id: 402, title: 'GATES OF OLYMPUS', subtitle: 'PRAGMATIC PLAY', cover: gameUrl },
-    { id: 403, title: 'SUGAR RUSH', subtitle: 'PRAGMATIC PLAY', cover: gameUrl },
-    { id: 404, title: 'FRUIT PARTY', subtitle: 'PRAGMATIC PLAY', cover: gameUrl },
-    { id: 405, title: 'WILD WEST', subtitle: 'PRAGMATIC PLAY', cover: gameUrl },
-    {
-      id: 406,
-      title: 'MAGIC BOOK',
-      subtitle: 'PRAGMATIC PLAY',
-      cover: gameUrl,
-    },
-  ],
+/**
+ * 国家/地区码 → 国旗图 URL（文件在 public/flag，文件名可与 ISO 不一致）
+ */
+export const GAME_COUNTRIES_FLAG_MAP: Record<string, string> = {
+  br: `${FLAG_PUBLIC_PREFIX}bra.png`,
+  de: `${FLAG_PUBLIC_PREFIX}Germany.png`,
+  jp: `${FLAG_PUBLIC_PREFIX}jb.png`,
+  us: `${FLAG_PUBLIC_PREFIX}USA.png`,
+  ar: `${FLAG_PUBLIC_PREFIX}urg.png`,
+  hu: `${FLAG_PUBLIC_PREFIX}hungary.png`,
 };
 
+const FLAG_CODES = Object.keys(GAME_COUNTRIES_FLAG_MAP);
+
+const avatarUrl = new URL('@/assets/imgs/public/tx_big.png', import.meta.url).href;
+const brFlag = GAME_COUNTRIES_FLAG_MAP.br;
+const deFlag = GAME_COUNTRIES_FLAG_MAP.de;
+
 /**
- * 模拟按厂商拉取游戏列表（后续换成真实 API）
+ * 厂商图标：必须用相对「本文件」的路径，new URL 不会解析 @ 别名（动态时必挂）。
+ * 本文件在 src/views/home/，资源在 src/assets/imgs/company/
  */
-export async function fetchGamesByProvider(providerId: string): Promise<ProviderGridGame[]> {
-  await new Promise((r) => setTimeout(r, 320));
-  return GAMES_BY_PROVIDER[providerId] ?? [];
+const companyPngUrl = (n: number) =>
+  new URL(`../../assets/imgs/company/${n}.png`, import.meta.url).href;
+
+/** 厂商图标 company/1.png ~ company/33.png */
+const buildGameCompanyMap = (): Record<number, string> => {
+  const map: Record<number, string> = {};
+  for (let n = 1; n <= 33; n++) {
+    map[n] = companyPngUrl(n);
+  }
+  return map;
+};
+
+export const GAME_COMPANY_MAP = buildGameCompanyMap();
+
+/**
+ * 玩家头像图
+ */
+const avatarDir = [
+  // '/avatar/asia',
+  '/avatar/europe',
+  // '/avatar/landscape',
+  '/avatar/other',
+];
+
+const buildGameAvatarMap = (): string[] => {
+  const list: string[] = [];
+
+  for (const dir of avatarDir) {
+    if (dir === '/avatar/europe') {
+      for (let n = 1; n <= 100; n++) {
+        list.push(`${dir}/fj${n}.png`);
+      }
+    } else if (dir === '/avatar/asia' || dir === '/avatar/landscape' || dir === '/avatar/other') {
+      for (let n = 1; n <= 50; n++) {
+        list.push(`${dir}/fj${n}.png`);
+      }
+    }
+  }
+
+  return list;
+};
+
+export const GAME_AVATAR_MAP = buildGameAvatarMap();
+
+/** 随机金额：整数部分为 3～5 位（100.00～99999.99），带两位小数 */
+export function randomPlayerBalance(): string {
+  const digitCount = 3 + Math.floor(Math.random() * 3);
+  const min = 10 ** (digitCount - 1);
+  const max = 10 ** digitCount - 1;
+  const intPart = Math.floor(Math.random() * (max - min + 1)) + min;
+  const cents = Math.floor(Math.random() * 100);
+  return `${intPart}.${String(cents).padStart(2, '0')}`;
 }
+
+function pickRandom<T>(arr: T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)]!;
+}
+
+/**
+ * 生成若干条随机玩家行（头像 / 国旗 / 金额均随机）
+ * @param count 条数，默认 100
+ */
+export function generateRandomPlayerRows(count = 100): PlayerInfo[] {
+  const avatars = GAME_AVATAR_MAP.length > 0 ? GAME_AVATAR_MAP : [avatarUrl];
+  const rows: PlayerInfo[] = [];
+  for (let i = 0; i < count; i++) {
+    const code = pickRandom(FLAG_CODES);
+    rows.push({
+      avatar: pickRandom(avatars),
+      countryImg: GAME_COUNTRIES_FLAG_MAP[code]!,
+      balance: randomPlayerBalance(),
+    });
+  }
+  return rows;
+}
+
+/** 预生成的 100 条随机玩家数据（可直接用于调试/列表） */
+export const RANDOM_PLAYER_ROWS_100 = generateRandomPlayerRows(100);
